@@ -1,27 +1,44 @@
-const express = require('express');
-const log = require('../logger/logger');
-const helper = require('../util/helper');
-const formatter = require('../validator/formatter');
-
+const express = require("express");
 const router = express.Router();
 
-router.get('/test-me', function (req, res) {
-    log.welcome()
-    res.send('<h1 style="text-align: center; color: maroon">My first ever api!</h1>')
-});
+let players = [
+  {
+    name: "manish",
+    dob: "1/1/1995",
+    gender: "male",
+    city: "jalandhar",
+    sports: ["swimming"],
+  },
+  {
+    name: "gopal",
+    dob: "1/09/1995",
+    gender: "male",
+    city: "delhi",
+    sports: ["soccer"],
+  },
+  {
+    name: "lokesh",
+    dob: "1/1/1990",
+    gender: "male",
+    city: "mumbai",
+    sports: ["soccer"],
+  },
+];
 
-router.get('/test-me2', function (req, res) {
-    let date = helper.printDate();
-    let month = helper.printMonth();
-    let batchInfo = helper.getBatchInfo();
-    res.send(`<h1 style="text-align: center; color: maroon">My first ever api! <br> date: ${date} month: ${month} <br> ${batchInfo}</h1>`);
-});
+router.post("/players", function (req, res) {
+    let data = req.body;
+    let isSame = false;
+  players.forEach(player => {
+      if(player.name == data.name){
+        isSame = true;
+      }
 
-router.get('/test-me3', (req, res) => {
-  let trimmed = formatter.trim();
-  let lowerCase = formatter.changeToLowerCase();
-  let upperCase = formatter.changeToUpperCase();
-  res.send(`<h1 style="text-align: center; color: maroon">My first ever api.<br>${trimmed}<br>${lowerCase}<br>${upperCase}</h1>`);
+  });
+  if(!isSame){
+      players.push(data);
+  }
+console.log(data);
+  res.send(  { data: players , status: true }  );
 });
 
 module.exports = router;
