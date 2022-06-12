@@ -1,18 +1,28 @@
 const express = require('express');
-const controller = require('../controllers/controller')
 
 const router = express.Router();
 
+router.get("/test-me", function (req, res, next) {
+  res.send("My first ever api!");
+  next();
+})
 
-router.post('/createBook', controller.createBook);
+const mid1= function ( req, res, next) {
+    console.log("Hi I am a middleware named Mid1")
+    // logic
+    let loggedIn = false
 
-router.post('/createAuthor', controller.createAuthor);
+    if (loggedIn== true) { 
+        console.log( "OK LOGGED IS IS TRUE NOW")
+        next ()
+    }
+    else {
+        res.send ("Please login or register")
+    }
+}
 
-router.get('/booksByChetanBhagat', controller.booksByChetanBhagat);
+router.get("/basicRoute", mid1);
 
-router.get('/authorOfTwoStates', controller.authorOfTwoStates);
-
-router.get('/bookBtw50_100', controller.bookBtw50_100);
 
 
 module.exports = router;
