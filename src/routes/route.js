@@ -1,28 +1,14 @@
 const express = require('express');
+const userController = require('../controllers/userController');
+const productController = require('../controllers/productController');
+const orderController = require('../controllers/orderController');
+const commonMw = require("../middlewares/commonMiddlewares")
 
 const router = express.Router();
 
-router.get("/test-me", function (req, res, next) {
-  res.send("My first ever api!");
-  next();
-})
-
-const mid1= function ( req, res, next) {
-    console.log("Hi I am a middleware named Mid1")
-    // logic
-    let loggedIn = false
-
-    if (loggedIn== true) { 
-        console.log( "OK LOGGED IS IS TRUE NOW")
-        next ()
-    }
-    else {
-        res.send ("Please login or register")
-    }
-}
-
-router.get("/basicRoute", mid1);
-
+router.post("/createUser", commonMw.mid1, userController.createUser)
+router.post('/createProduct', productController.createProduct);
+router.post("/createOrder", commonMw.mid1, orderController.createOrder)
 
 
 module.exports = router;
