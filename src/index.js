@@ -18,9 +18,10 @@ mongoose.connect("mongodb+srv://AshutoshGupta:ashutosh54264850@cluster0.ukus0.mo
 
 app.use (
     function (req, res, next) {
-      let dateTime=moment().format('DD.MM.YYYY HH:mm:ss')
-      let ip = req.socket.remoteAddress;
-      let data = `${dateTime}, ${ip}`;
+     let dateTime=moment().format('DD.MM.YYYY HH:mm:ss')
+      let ip = req.ip;
+      let url = req.originalUrl;
+      let data = `${dateTime}, ${ip}, ${url}`;
         console.log(data);
         console.log ("inside GLOBAL MW");
         next();
