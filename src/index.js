@@ -9,25 +9,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-mongoose.connect("mongodb+srv://AshutoshGupta:ashutosh54264850@cluster0.ukus0.mongodb.net/middleware2", {
+mongoose.connect("mongodb+srv://AshutoshGupta:ashutosh54264850@cluster0.ukus0.mongodb.net/Auth-1", {
     useNewUrlParser: true
 })
 .then( () => console.log("MongoDb is connected"))
 .catch ( err => console.log(err) )
 
-// app.use (
-//     function (req, res, next) {
-//       let dateTime=moment().format('DD.MM.YYYY HH:mm:ss')
-//       let ip = req.ip;
-//       let url = req.originalUrl;
-//       let data = `${dateTime}, ${ip}, ${url}`;
-//         console.log(data);
-//         console.log ("inside GLOBAL MW");
-//         next();
-//   }
-//   );
 
-  app.use('/', route);
+app.use('/', route);
 
   
 app.listen(process.env.PORT || 3000, function () {
