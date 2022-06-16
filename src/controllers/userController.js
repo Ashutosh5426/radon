@@ -19,16 +19,27 @@ const loginUser = async function (req, res){
       msg: 'username or password is not found'
     })
   }
+  // let token = jwt.sign(
+  //   {
+  //     userId: user._id.toString(),
+  //     batch: 'radon',
+  //     organisation: 'functionUp'
+  //   },
+  //   "functionUp-radon"
+  // );
+  // res.setHeader('x-auth-token', token);
+  // res.send({ status: true, token: token });
   let token = jwt.sign(
     {
       userId: user._id.toString(),
-      batch: 'radon',
-      organisation: 'functionUp'
+      batch: "thorium",
+      organisation: "FunctionUp",
     },
-    "functionUp-radon"
+    "functionup-radon"
   );
-  res.setHeader('x-auth-token', token);
+  res.setHeader("x-auth-token", token);
   res.send({ status: true, token: token });
+  console.log(token);
 }
 
 const getUserData = async function (req, res) {
@@ -42,8 +53,9 @@ const getUserData = async function (req, res) {
 
 const updateUser = async function (req, res) {
   let userId = req.params.userId;
-    let user = await userModel.findById(userId);
-    
+    // let user = await userModel.findById(userId);
+    let user = await userModel.findOne({userId});
+    console.log(user);
     if (!user) {
       return res.send("No such user exists");
     }

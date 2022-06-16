@@ -12,7 +12,7 @@ router.get("/users/:userId", commonMw.mid, userController.getUserData);
 
 router.put("/users/:userId", commonMw.mid, userController.updateUser)
 
-router.delete("/users/:userId", , userCocommonMw.midntroller.deleteUser)
+router.delete("/users/:userId", commonMw.mid, userController.deleteUser)
 
 
 module.exports = router;
