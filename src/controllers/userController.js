@@ -22,7 +22,7 @@ const loginUser = async function (req, res) {
     let user = await userModel.findOne({ emailId: email, password: password });
 
     if (!user) {
-      res.send({
+      res.status(404).send({
         status: false,
         msg: "username or password is not found",
       });
@@ -38,7 +38,7 @@ const loginUser = async function (req, res) {
     );
 
     res.setHeader("x-auth-token", token);
-    res.send({ status: true, token: token });
+    res.status(200).send({ status: true, token: token });
     console.log(token);
   } catch (err) {
     res.status(401).send(err.message);
