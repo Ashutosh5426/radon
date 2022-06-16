@@ -8,11 +8,11 @@ router.post("/users", userController.createUser)
 
 router.post("/login", userController.loginUser)
 
-router.get("/users/:userId", commonMw.mid, userController.getUserData);
+router.get("/users/:userId", commonMw.authorize, userController.getUserData);
 
-router.put("/users/:userId", commonMw.mid, userController.updateUser)
+router.put("/users/:userId", commonMw.authorize, userController.updateUser)
 
-router.delete("/users/:userId", commonMw.mid, userController.deleteUser)
+router.delete("/users/:userId", commonMw.authorize, userController.deleteUser)
 
 
 module.exports = router;

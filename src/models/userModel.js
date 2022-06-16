@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     mobile : String,
     emailId : {
       type: String,
+      unique: true,
       required: true
     },
     password : {
